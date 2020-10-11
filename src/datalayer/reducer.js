@@ -7,7 +7,7 @@ export const initialState = {
       id: 1,
       name: "Tata Nukala",
       phone: 8919235358,
-      email: "tatanaidunukala@gmail.com",
+      email: "tataabhi@gmail.com",
     },
     {
       id: 2,
@@ -17,19 +17,54 @@ export const initialState = {
     },
     {
       id: 3,
-      name: "Lakshmi K",
+      name: "Tom Cruise",
       phone: 8919123456,
-      email: "lakhshmi@gmail.com",
+      email: "tomcruise@gmail.com",
     },
-    { id: 4, name: "Sruthi R", phone: 8919123654, email: "sruthi@gmail.com" },
+    { id: 4, name: "Sri Ram", phone: 8919123654, email: "sriram@gmail.com" },
     {
       id: 5,
       name: "Carol Teja",
       phone: 7512362950,
       email: "carol1234@gmail.com",
     },
-    { id: 6, name: "Vidhya K", phone: 7569123456, email: "vidhya@gmail.com" },
-    { id: 7, name: "Syam P V", phone: 8888123654, email: "syam@gmail.com" },
+    {
+      id: 6,
+      name: "Vineeth V",
+      phone: 7569123456,
+      email: "vineethv@gmail.com",
+    },
+    { id: 7, name: "Syam V", phone: 8888123654, email: "syam@gmail.com" },
+    {
+      id: 8,
+      name: "Maxwell William",
+      phone: 1234567890,
+      email: "maxwellw@gmail.com",
+    },
+    {
+      id: 9,
+      name: "Priya R",
+      phone: 7891234567,
+      email: "priyar@gmail.com",
+    },
+    {
+      id: 10,
+      name: "Padma P",
+      phone: 9999123654,
+      email: "padmapv@gmail.com",
+    },
+    {
+      id: 11,
+      name: "Bhavya B",
+      phone: 9456789159,
+      email: "bhavyab@gmail.com",
+    },
+    {
+      id: 12,
+      name: "Lakshmi K",
+      phone: 7777123654,
+      email: "lakshmik@gmail.com",
+    },
   ],
   openChat: false,
 };
@@ -44,6 +79,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, openChat: action.openChat };
     case "SET_CURRENT_CARD":
       return { ...state, currentCard: action.currentCard };
+    case "ADD__CONTACTS":
+      return { ...state, contacts: [...state.contacts, action.contact] };
     default:
       return state;
   }

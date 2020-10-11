@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import _ from "lodash";
 import ContactsBar from "./components/contactsBar/ContactsBar";
 import Header from "./components/header/Header";
 import { useStateValue } from "./datalayer/StateProvider";

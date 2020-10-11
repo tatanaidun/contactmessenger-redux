@@ -3,6 +3,7 @@ import React from "react";
 import _ from "lodash";
 import { useStateValue } from "../../datalayer/StateProvider";
 import "./ContactCard.css";
+import { getLettersFromName } from "../../util";
 
 function ContactCard() {
   const [{ currentUser, currentCard }, dispatch] = useStateValue();
@@ -14,7 +15,15 @@ function ContactCard() {
   return (
     <div className="contactCard">
       <div className="contactCard__avatar flexCenter">
-        <Avatar style={{ width: "100px", height: "100px" }} />
+        <Avatar
+          style={{
+            width: "100px",
+            height: "100px",
+            backgroundColor: "#f80759",
+          }}
+        >
+          <p>{getLettersFromName(currentCard.name)}</p>
+        </Avatar>
       </div>
       <div className="contactCard__name flexCenter">
         <h3>{currentCard.name}</h3>

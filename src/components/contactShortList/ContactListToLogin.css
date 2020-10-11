@@ -5,7 +5,7 @@
   overflow-y: scroll;
   height: 180px;
   width: 200px;
-  background-color: azure;
+  background-color: rgba(245, 235, 235, 0.404);
   z-index: 5;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .contactListToLogin__contact:hover {
-  background-color: aqua;
+  background-color: #d492c2;
 }
 
 .contactListToLogin__name {

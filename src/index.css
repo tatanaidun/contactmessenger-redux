@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.avatarText {
+  font-size: small;
+}
+
 body {
   margin: 0;
   font-family: Epilogue, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",

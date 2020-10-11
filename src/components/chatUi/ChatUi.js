@@ -1,13 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
-import React, { useEffect, useState } from "react";
 import { useStateValue } from "../../datalayer/StateProvider";
 import "./ChatUi.css";
 import db from "../../firebase";
 
 import firebase from "firebase";
+import { getLettersFromName } from "../../util";
 
 function ChatUi() {
   const [{ currentCard, currentUser }] = useStateValue();
@@ -35,7 +36,6 @@ function ChatUi() {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log("you typed  >>", input);
     if (input.length > 0) {
       db.collection("messages").doc(dbKeyGen()).collection("messages").add({
         message: input,
@@ -52,7 +52,13 @@ function ChatUi() {
   return (
     <div className="chatUi">
       <div className="chatUi__header">
-        <Avatar />
+        <Avatar
+          style={{
+            backgroundColor: "#f80759",
+          }}
+        >
+          <p className="avatarText">{getLettersFromName(currentCard.name)}</p>
+        </Avatar>
         <div className="chatUi__headerInfo">
           <h4>{currentCard.name}</h4>
         </div>
@@ -77,7 +83,7 @@ function ChatUi() {
           >
             {message.message}
             <span className="chatUi__timestamp">
-              {new Date(message.timestamp?.toDate()).toUTCString()}
+              {new Date(message.timestamp?.toDate()).toLocaleString()}
             </span>
           </p>
         ))}
