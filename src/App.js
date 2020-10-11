@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import _ from "lodash";
+import ContactsBar from "./components/contactsBar/ContactsBar";
+import Header from "./components/header/Header";
+import { useStateValue } from "./datalayer/StateProvider";
+import ContactCard from "./components/contactCard/ContactCard";
+import ChatUi from "./components/chatUi/ChatUi";
 
 function App() {
+  const [{ currentUser, openChat }] = useStateValue();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="app__header">
+        <Header />
+      </div>
+
+      <div className="app__body">
+        {currentUser.length < 1 ? (
+          <div className="app__welcome">
+            <p>Please login to see your contacts list</p>
+          </div>
+        ) : (
+          <>
+            <div className="app__contactsBar">
+              <ContactsBar />
+            </div>
+            {!openChat && (
+              <div className="app__contactCard">
+                <ContactCard />
+              </div>
+            )}
+          </>
+        )}
+
+        {openChat && (
+          <div className="app__chatUi">
+            <ChatUi />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

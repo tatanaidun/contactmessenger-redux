@@ -1,0 +1,53 @@
+.contactsBar {
+  border-radius: 5px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+}
+
+.contactsBar__header {
+  background-color: lightgray;
+  padding: 0.7rem;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  font-size: large;
+}
+
+.contactsBar__body {
+  height: 700px;
+  overflow-y: auto;
+}
+.contactsBar__header__basicInfo {
+  flex: 0.6;
+  padding-left: 2rem;
+}
+
+.contactsBar__header__phone {
+  flex: 0.4;
+}
+
+.contact {
+  padding: 1rem;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  font-family: Roboto;
+}
+
+.contact:hover {
+  background-color: rgba(231, 231, 231, 0.445);
+  cursor: pointer;
+}
+
+.contact__basic {
+  flex: 0.6;
+  padding-left: 10px;
+}
+
+.contact__basic > p {
+  font-size: small;
+  color: gray;
+  margin-top: 5px;
+}
+.contact__phone {
+  flex: 0.4;
+}
