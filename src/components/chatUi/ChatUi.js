@@ -3,18 +3,23 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
-import { useStateValue } from "../../datalayer/StateProvider";
 import "./ChatUi.css";
-import db from "../../firebase";
-
-import firebase from "firebase";
 import { getLettersFromName } from "../../util";
+import { useSelector, useDispatch } from "react-redux";
+import { addMessages } from "../../datalayer/actions";
 
 function ChatUi() {
-  const [{ currentCard, currentUser }] = useStateValue();
+  const { currentCard, currentUser, allmessages } = useSelector(
+    ({ currentCard, currentUser, allmessages }) => ({
+      currentCard,
+      currentUser,
+      allmessages,
+    })
+  );
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-
+  const dispatch = useDispatch();
   const dbKeyGen = () =>
     (currentUser + currentCard.name)
       .split(" ")
@@ -25,23 +30,19 @@ function ChatUi() {
       .join("");
 
   useEffect(() => {
-    db.collection("messages")
-      .doc(dbKeyGen())
-      .collection("messages")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) =>
-        setMessages(snapshot.docs.map((doc) => doc.data()))
-      );
-  }, [currentCard, currentUser]);
+    setMessages(allmessages[dbKeyGen()] || []);
+  }, [currentCard, currentUser, allmessages]);
 
   const sendMessage = (e) => {
     e.preventDefault();
     if (input.length > 0) {
-      db.collection("messages").doc(dbKeyGen()).collection("messages").add({
-        message: input,
-        senderName: currentUser,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
+      dispatch(
+        addMessages(dbKeyGen(), {
+          message: input,
+          senderName: currentUser,
+          timestamp: new Date(),
+        })
+      );
     }
     setInput("");
   };
@@ -77,13 +78,14 @@ function ChatUi() {
       <div className="chatUi__body">
         {messages.map((message) => (
           <p
+            key={message?.timestamp}
             className={`chatUi__message ${
               currentUser === message.senderName && "chatUi__receiver"
             }`}
           >
             {message.message}
             <span className="chatUi__timestamp">
-              {new Date(message.timestamp?.toDate()).toLocaleString()}
+              {new Date(message.timestamp)?.toLocaleString()}
             </span>
           </p>
         ))}

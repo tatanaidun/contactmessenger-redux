@@ -4,12 +4,18 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import ContactListToLogin from "../contactShortList/ContactListToLogin";
 import "./Header.css";
-import { useStateValue } from "../../datalayer/StateProvider";
+import { useSelector, useDispatch } from "react-redux";
+import { setClicked } from "../../datalayer/actions";
 
 function Header() {
-  const [{ currentUser, clicked }, dispatch] = useStateValue();
+  const { currentUser, clicked } = useSelector(({ currentUser, clicked }) => ({
+    currentUser,
+    clicked,
+  }));
+
+  const dispatch = useDispatch();
   const showContactsShortList = () => {
-    dispatch({ type: "SET_CLICKED", clicked: !clicked });
+    dispatch(setClicked(!clicked));
   };
 
   return (

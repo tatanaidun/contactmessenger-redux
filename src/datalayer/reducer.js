@@ -67,6 +67,7 @@ export const initialState = {
     },
   ],
   openChat: false,
+  allmessages: {},
 };
 
 export const reducer = (state = initialState, action) => {
@@ -79,8 +80,19 @@ export const reducer = (state = initialState, action) => {
       return { ...state, openChat: action.openChat };
     case "SET_CURRENT_CARD":
       return { ...state, currentCard: action.currentCard };
-    case "ADD__CONTACTS":
+    case "ADD_CONTACTS":
       return { ...state, contacts: [...state.contacts, action.contact] };
+    case "ADD_MESSAGES":
+      const newMessageObj = { ...state.allmessages };
+      if (state.allmessages[action.payload.key]) {
+        newMessageObj[action.payload.key] = [
+          ...state.allmessages[action.payload.key],
+          action.payload.messageObj,
+        ];
+      } else {
+        newMessageObj[action.payload.key] = [action.payload.messageObj];
+      }
+      return { ...state, allmessages: newMessageObj };
     default:
       return state;
   }

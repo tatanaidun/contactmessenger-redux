@@ -1,15 +1,23 @@
 import { Avatar, Button } from "@material-ui/core";
 import React from "react";
 import _ from "lodash";
-import { useStateValue } from "../../datalayer/StateProvider";
 import "./ContactCard.css";
 import { getLettersFromName } from "../../util";
+import { useSelector, useDispatch } from "react-redux";
+import { setOpenChatUi } from "../../datalayer/actions";
 
 function ContactCard() {
-  const [{ currentUser, currentCard }, dispatch] = useStateValue();
+  const { currentCard, currentUser } = useSelector(
+    ({ currentCard, currentUser }) => ({
+      currentCard,
+      currentUser,
+    })
+  );
+
+  const dispatch = useDispatch();
 
   const openMessageUi = () => {
-    dispatch({ type: "SET_OPENCHAT_UI", openChat: true });
+    dispatch(setOpenChatUi(true));
   };
 
   return (

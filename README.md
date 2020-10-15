@@ -1,4 +1,4 @@
-## Contact Messenger made with ReactJs powered up by Firebase
+## Contact Messenger made with ReactJs and Redux
 
 ### Installation steps:
 

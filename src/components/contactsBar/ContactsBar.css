@@ -13,7 +13,7 @@
 }
 
 .contactsBar__body {
-  height: 700px;
+  height: 600px;
   overflow-y: auto;
 }
 .contactsBar__header__basicInfo {
@@ -33,14 +33,10 @@
   font-family: Roboto;
 }
 
-.contact:hover {
-  background-color: rgba(231, 231, 231, 0.445);
-  cursor: pointer;
-}
-
 .contact__basic {
   flex: 0.6;
   padding-left: 10px;
+  padding: 1rem;
 }
 
 .contact__basic > p {
@@ -48,6 +44,12 @@
   color: gray;
   margin-top: 5px;
 }
+
+.contact__basic:hover {
+  background-color: rgba(231, 231, 231, 0.445);
+  cursor: pointer;
+}
+
 .contact__phone {
   flex: 0.4;
 }
@@ -88,4 +90,59 @@
   display: flex;
 
   justify-content: center;
+}
+
+.contactsBar__addContact {
+  display: flex;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.contactsBar__searchBar {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  border: 1px solid gray;
+  background-color: rgb(243, 243, 243);
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+.contactsBar__searchBar > input::-webkit-input-placeholder {
+  font-style: Roboto;
+  font-size: larger;
+}
+
+.contactsBar__searchBar > input::-moz-placeholder {
+  font-style: Roboto;
+} /* Firefox 19+ */
+
+.contactsBar__searchBar > input:-ms-input-placeholder {
+  font-style: Roboto;
+} /* IE 10+ */
+
+.contactsBar__searchBar > input:-moz-placeholder {
+  font-style: Roboto;
+} /* Firefox 18- */
+
+.contactsBar__searchBar > input {
+  flex: 1;
+  background-color: rgb(243, 243, 243);
+  height: 30px;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.contactsBar__searchIcon {
+  padding: 3px;
+}
+
+.contactsBar__addContact > button {
+  background: linear-gradient(to right, #f80759, #bc4e9c);
+  width: 150px;
+  margin-left: 3px;
+  padding: 2px;
+  white-space: nowrap;
+  border-radius: 10px;
 }

@@ -1,17 +1,28 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import { useStateValue } from "../../datalayer/StateProvider";
 import "./ContactListToLogin.css";
 import { getLettersFromName } from "../../util";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setCurrentUser,
+  setClicked,
+  setCurrentCard,
+  setOpenChatUi,
+} from "../../datalayer/actions";
 
 export default function ContactListToLogin() {
-  const [{ contacts, clicked }, dispatch] = useStateValue();
+  const { contacts, clicked } = useSelector(({ contacts, clicked }) => ({
+    contacts,
+    clicked,
+  }));
+
+  const dispatch = useDispatch();
 
   const loginFunction = (contact) => {
-    dispatch({ type: "SET_CURRENT_USER", currentUser: contact.name });
-    dispatch({ type: "SET_CLICKED", clicked: !clicked });
-    dispatch({ type: "SET_CURRENT_CARD", currentCard: contact });
-    dispatch({ type: "SET_OPENCHAT_UI", openChat: false });
+    dispatch(setCurrentUser(contact.name));
+    dispatch(setClicked(!clicked));
+    dispatch(setCurrentCard(contact));
+    dispatch(setOpenChatUi(false));
   };
 
   return (
